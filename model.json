@@ -1,0 +1,15 @@
+{
+  "position": "plus code from google maps",
+  "favorites": [
+    {
+      "name": "",
+      "description": "",
+      "type": {
+        "name": "",
+        "image": "path/to/icon.png"
+      },
+      "address": "plus code from google maps",
+      "promo": 0
+    }
+  ]
+}
