@@ -5,10 +5,10 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const Article = (props) => {
-  const [storingData, setStoringData] = useState(false);
+  
   const [favorite, setFavorite] = useState('');
 
-  const STORAGE_KEY = '@save_input';
+  const STORAGE_KEY = '@favorites';
 
   const saveData = async () => {
     try {

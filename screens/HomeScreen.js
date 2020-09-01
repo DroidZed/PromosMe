@@ -5,12 +5,44 @@ import { StyleSheet, View, Keyboard, Button, StatusBar } from 'react-native';
 
 import ArtSearchBar from '../components/ArtSearchBar';
 import ArticlesList from '../components/ArticlesList';
-import {favorites as fav} from '../model.json';
-
+import { favorites as fav } from '../model.json';
 
 const HomeScreen = (props) => {
   const [input, setInput] = useState('');
   const [collectedData, setCollectedData] = useState([]);
+  const [storing, setStoring] = useState({});
+
+  const STORAGE_KEY = '@apiDATA';
+
+  const saveData = async (bab) => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, bab);
+      alert('Data successfully saved');
+    } catch (e) {
+      alert('Failed to save the data to the storage');
+    }
+  };
+
+  const readData = async () => {
+    try {
+      const userInput = await AsyncStorage.getItem(STORAGE_KEY);
+
+      if (userInput !== null) {
+        setStoring(userInput);
+      }
+    } catch (e) {
+      alert('Failed to fetch the data from storage');
+    }
+  };
+
+  const clearStorage = async () => {
+    try {
+      await AsyncStorage.clear();
+      alert('Storage successfully cleared!');
+    } catch (e) {
+      alert('Failed to clear the async storage.');
+    }
+  };
 
   const updateSearch = (search) => setInput(search);
 
@@ -18,6 +50,16 @@ const HomeScreen = (props) => {
     setInput('');
     Keyboard.dismiss();
   };
+
+  const saveAndSetFetches = (info) => {
+    saveData(info);
+    setCollectedData(info);
+  };
+
+  /*
+  *
+  * TODO: #1 fix the storing of the data fetched from the api :/
+  */
 
   let url = 'http://localhost:3000/Article/';
 
@@ -28,7 +70,7 @@ const HomeScreen = (props) => {
         response
           .json()
           .then((data) => {
-            setCollectedData(data);
+            saveAndSetFetches(data);
           })
           .catch('NO DATA TO BE RETRIEVED.');
       })
@@ -59,10 +101,7 @@ const HomeScreen = (props) => {
       />
       <Button title="X" onPress={clearInput} />
       <View>
-        <ArticlesList
-          data={collectedData}
-          keyExtractor={item => item.id}
-        />
+        <ArticlesList data={collectedData} keyExtractor={(item) => item.id} />
       </View>
     </View>
   );
