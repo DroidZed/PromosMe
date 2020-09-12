@@ -1,76 +1,54 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Keyboard, Button, StatusBar } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { StyleSheet, View, FlatList, TouchableWithoutFeedback, Image } from 'react-native';
 
-//custom components:
+//Imported Libraries:
+import { Provider, FAB } from 'react-native-paper';
+import { useColorScheme } from 'react-native-appearance';
 
-import ArtSearchBar from '../components/ArtSearchBar';
-import ArticlesList from '../components/ArticlesList';
-import { favorites as fav } from '../model.json';
+//Custom Components:
+import { store } from '../store/favsStore';
+import ProdSearchBar from '../components/ProdSearchBar';
+import Product from '../components/Product';
+import Header from '../components/Header';
+import FocusAwareStatusBar from '../components/FocusAware';
 
-const HomeScreen = (props) => {
+//Color Palette:
+import Colors from '../constants/Colors';
+
+const HomeScreen = () => {
+  const { State, setState } = useContext(store);
   const [input, setInput] = useState('');
   const [collectedData, setCollectedData] = useState([]);
-  const [storing, setStoring] = useState({});
+  const colorScheme = useColorScheme();
 
-  const STORAGE_KEY = '@apiDATA';
-
-  const saveData = async (bab) => {
-    try {
-      await AsyncStorage.setItem(STORAGE_KEY, bab);
-      alert('Data successfully saved');
-    } catch (e) {
-      alert('Failed to save the data to the storage');
-    }
+  const filterFavs = (item) => {
+    return collectedData.filter(State.includes(item.id));
   };
 
-  const readData = async () => {
-    try {
-      const userInput = await AsyncStorage.getItem(STORAGE_KEY);
+  console.log(State);
 
-      if (userInput !== null) {
-        setStoring(userInput);
-      }
-    } catch (e) {
-      alert('Failed to fetch the data from storage');
-    }
-  };
+  const renderItem = ({ item }) => (
+    <Product
+      name={item.name}
+      description={item.description}
+      type={item.type}
+      promo={item.promo}
+      address={item.address}
+      image={item.image?.split('.')[0]}
+      id={item.id}
+    />
+  );
 
-  const clearStorage = async () => {
-    try {
-      await AsyncStorage.clear();
-      alert('Storage successfully cleared!');
-    } catch (e) {
-      alert('Failed to clear the async storage.');
-    }
-  };
-
-  const updateSearch = (search) => setInput(search);
-
-  const clearInput = () => {
-    setInput('');
-    Keyboard.dismiss();
-  };
-
-  const saveAndSetFetches = (info) => {
-    saveData(info);
-    setCollectedData(info);
-  };
-
-  /*
-  *
-  * TODO: #1 fix the storing of the data fetched from the api :/
-  */
-
-  let url = 'http://localhost:3000/Article/';
+  const url = 'http://localhost:3000/Article/';
 
   const getInfos = () => {
-    return fetch(url + input)
+    return fetch(url)
       .then((response) => {
         console.log('SUCCESS');
         response
           .json()
           .then((data) => {
-            saveAndSetFetches(data);
+            setCollectedData(data);
           })
           .catch('NO DATA TO BE RETRIEVED.');
       })
@@ -80,36 +58,51 @@ const HomeScreen = (props) => {
   useEffect(() => {
     getInfos();
   }, []);
-
-  console.log(collectedData);
-
+  
   return (
-    <View style={{ ...Styling.HomeScreen, ...props.style }}>
-      <StatusBar barStyle="default" translucent={true} />
-      <View>
-        <View>
-          <Button title="Home" onPress={props.navHome} />
-          <Button title="Map" onPress={props.navMap} />
+    <TouchableWithoutFeedback>
+      <Provider>
+        <View style={{ flex: 1, backgroundColor: colorScheme === 'dark' ? 'black' : 'white' }}>
+          <FocusAwareStatusBar barStyle="light-content" backgroundColor={Colors.darkPrimary} />
+          <Header title="HOME" style={{ backgroundColor: Colors.accent }} />
+          <ProdSearchBar val={input} clearInput={() => setInput('')} updateSearch={(search) => setInput(search)} />
+          <View style={Styling.ListContainer}>
+            <FlatList
+              contentContainerStyle={{ padding: 10 }}
+              data={
+                input
+                  ? !input.includes(',')
+                    ? collectedData.filter((term) => (term.type.includes(input) ? term : null))
+                    : collectedData.filter((term) => input.split(',').includes(term.type))
+                  : collectedData
+              }
+              renderItem={renderItem}
+              keyExtractor={(item) => String(item.id)}
+              showsVerticalScrollIndicator={false}
+            />
+          </View>
+          <FAB style={Styling.fab} small icon="heart" onPress={() => console.log('Pressed')} />
         </View>
-      </View>
-      <ArtSearchBar
-        findInfo={() => {}}
-        val={input}
-        clearInput={clearInput}
-        updateSearch={updateSearch}
-        style={Styling.searchBar}
-      />
-      <Button title="X" onPress={clearInput} />
-      <View>
-        <ArticlesList data={collectedData} keyExtractor={(item) => item.id} />
-      </View>
-    </View>
+      </Provider>
+    </TouchableWithoutFeedback>
   );
 };
 
 const Styling = StyleSheet.create({
-  searchBar: {},
-  HomeScreen: {},
+  ListContainer: {
+    width: '95%',
+    alignSelf: 'center',
+    flex: 1,
+    flexGrow: 1,
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    color: 'black',
+    backgroundColor: Colors.heartColor,
+  },
 });
 
 export default HomeScreen;

@@ -2,5 +2,4 @@
 <resources>
     <color name="primary_light">#ffffff</color>
     <color name="primary_dark">#000000</color>
-    <color name="gray_content">#c7c7c7</color>
 </resources>

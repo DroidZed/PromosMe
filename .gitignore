@@ -57,3 +57,9 @@ buck-out/
 
 # CocoaPods
 /ios/Pods/
+
+#template file for creating components !
+template.js
+
+#shell script to make things easier:
+cleanAndBuild.bat

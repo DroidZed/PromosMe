@@ -12,9 +12,11 @@ module.exports = {
     jest: true,
   },
   plugins: ['react', 'prettier'],
-  extends: ['prettier', 'react-app', '@react-native-community'],
+  extends: ['prettier', 'react-app', '@react-native-community', 'plugin:react-hooks/recommended'],
   rules: {
     'no-unreachable': 'error',
     'no-console': 'error',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
 };

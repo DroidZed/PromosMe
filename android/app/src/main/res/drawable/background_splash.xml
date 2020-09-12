@@ -5,9 +5,7 @@
         android:drawable="@color/primary_light" />
 
     <item
-        android:drawable="@drawable/icon"
-        android:height="200dp"
-        android:width="200dp"
+        android:drawable="@drawable/screen"
         android:gravity="center"
         />
 
