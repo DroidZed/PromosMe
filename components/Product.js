@@ -63,7 +63,7 @@ const Product = (props) => {
         <Card.Actions style={{ marginVertical: 5, paddingVertical: 0 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, justifyContent: 'space-between' }}>
             {
-              // TODO #3 Correct the logic here, so you can remove the fav once it's clicked again !
+              //TODO #4 : Correct the logic here, so you can remove the fav once it's clicked again !
             }
             <HeartAnime
               favorite={State.favorites?.includes(props.id)}
