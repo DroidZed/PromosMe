@@ -21,7 +21,7 @@ const HomeScreen = () => {
   const [pressed, setPressed] = useState(false);
   const [collectedData, setCollectedData] = useState([]);
   const colorScheme = useColorScheme();
-  const _backup_Data = collectedData;
+
   let fav_col = collectedData.filter((e) => State.favorites.includes(e.id));
 
   const renderItem = ({ item }) => (
@@ -74,7 +74,7 @@ const HomeScreen = () => {
                   ? !input.includes(',')
                     ? collectedData.filter((term) => (term.type.includes(input) ? term : null))
                     : collectedData.filter((term) => input.split(',').includes(term.type))
-                  : pressed
+                  : pressed && fav_col
                   ? fav_col
                   : collectedData
               }

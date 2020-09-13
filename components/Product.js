@@ -62,15 +62,14 @@ const Product = (props) => {
         </TouchableOpacity>
         <Card.Actions style={{ marginVertical: 5, paddingVertical: 0 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, justifyContent: 'space-between' }}>
-            {
-              //TODO #4 : Correct the logic here, so you can remove the fav once it's clicked again !
-            }
             <HeartAnime
               favorite={State.favorites?.includes(props.id)}
               onPress={() =>
                 setState((p) => ({
                   ...p,
-                  favorites: [...p.favorites, props.id],
+                  favorites: !p.favorites?.includes(props.id)
+                    ? [...p.favorites, props.id]
+                    : [...p.favorites.filter((item) => item != props.id)],
                 }))
               }
               color={colorScheme === 'dark' ? 'white' : 'black'}
