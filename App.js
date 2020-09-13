@@ -84,7 +84,7 @@ const App = () => {
             tabBarOptions={{
               activeTintColor: Colors.primary,
               inactiveTintColor: 'gray',
-              showLabel: false,
+              showLabel: true,
               adaptive: true,
               tabStyle: {
                 backgroundColor: colorScheme === 'dark' ? 'black' : 'white',

@@ -5,7 +5,7 @@ import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, Text } from 'reac
 import MapboxGL, { MapView, Camera, MarkerView } from '@react-native-mapbox-gl/maps';
 import { useColorScheme } from 'react-native-appearance';
 import RNLocation from 'react-native-location';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+//import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 //Custom Components:
 import Header from '../components/Header';
@@ -40,8 +40,6 @@ const MapScreen = (props) => {
     });
   };
 
-  console.info(coords);
-
   useEffect(() => clawLocation());
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -51,13 +49,14 @@ const MapScreen = (props) => {
           <MapView
             style={Styling.map}
             compassEnabled={true}
+            compassEnabled={true}
             styleURL={
               colorScheme === 'dark'
                 ? 'mapbox://styles/droidzed/ckewxui2c171z1ao9fy85mk6o'
                 : 'mapbox://styles/droidzed/ckewxpuy40mla19pbmvzp2bp8'
             }
           >
-            <Camera zoomLevel={15} followUserLocation={true} />
+            <Camera zoomLevel={15} followUserLocation={coords ? true : false} />
             {
               // TODO: #2 FIX THE DAMN MARKER THING ... :(
               /*  

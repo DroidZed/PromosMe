@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { Text, View, StyleSheet, Linking, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
 //Custom Components:
 import HeartAnime from './HeartAnim';
 import { store } from '../store/favsStore';
 
 //Imported Libraries:
-import { Button, Card, Title, Paragraph } from 'react-native-paper';
+import { Card, Title, Paragraph } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
 import { useColorScheme } from 'react-native-appearance';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';

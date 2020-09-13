@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import LinkingButton from '../components/LinkingButton';
-import { useColorScheme } from 'react-native-appearance';
+
+import UICondText from '../components/UICondText';
 
 const LabelToButtonInline = (props) => {
-  const colorScheme = useColorScheme();
   return (
     <View style={Styling.btnLabel}>
-      <Text style={{ color: colorScheme === 'light' ? 'black' : 'white' }}>{props.label}</Text>
+      <UICondText>{props.label}</UICondText>
       <LinkingButton
         style={Styling.btn}
         where={props.where}
@@ -29,7 +29,7 @@ const Styling = StyleSheet.create({
   },
   btn: {
     width: 50,
-    maxWidth:'100%'
+    maxWidth: '100%',
   },
 });
 
