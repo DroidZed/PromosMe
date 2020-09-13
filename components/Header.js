@@ -6,7 +6,7 @@ import Colors from '../constants/Colors';
 
 const Header = (props) => {
   return (
-    <View style={{...Styling.header,...props.style}}>
+    <View style={{ ...Styling.header, ...props.style }}>
       <Text style={Styling.hdrText}>{props.title}</Text>
     </View>
   );
@@ -22,6 +22,7 @@ const Styling = StyleSheet.create({
     color: Colors.headerText,
     fontSize: 40,
     fontWeight: '400',
+    fontFamily: 'BebasNeue-Regular',
   },
 });
 

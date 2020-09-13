@@ -2,4 +2,5 @@
 <resources>
     <color name="primary_light">#ffffff</color>
     <color name="primary_dark">#000000</color>
+    <color name="accent">#9643db</color>
 </resources>

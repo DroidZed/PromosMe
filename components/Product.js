@@ -6,10 +6,9 @@ import HeartAnime from './HeartAnim';
 import { store } from '../store/favsStore';
 
 //Imported Libraries:
-import { Card, Title, Paragraph } from 'react-native-paper';
+import { Card, Title } from 'react-native-paper';
 import * as Animatable from 'react-native-animatable';
 import { useColorScheme } from 'react-native-appearance';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import LinkingButton from './LinkingButton';
 
 //Color palette:
@@ -31,16 +30,41 @@ const Product = (props) => {
       >
         <Card.Content style={{ marginVertical: 5 }}>
           <Title style={{ alignSelf: 'center' }}>{props.name}</Title>
-          <Paragraph>
+          <View>
             <Text style={{ color: 'gray', fontStyle: 'italic' }}>{props.description}</Text>
-            {'\n'}Promo: <Text style={{ color: Colors.promoText }}>-{props.promo}%</Text>
-          </Paragraph>
+            <Text
+              style={{
+                color: colorScheme === 'light' ? Colors.priceText : 'rgb(42, 126, 244)',
+              }}
+            >
+              {'\n'}Promo:{'\t'}
+              <Text style={{ color: Colors.promoText }}> -{props.promo}%</Text>
+            </Text>
+            <Text
+              style={{
+                color: colorScheme === 'light' ? Colors.priceText : 'rgb(42, 126, 244)',
+              }}
+            >
+              {'\n'}Price:{'\t'}
+              <Text
+                style={{
+                  color: Colors.priceText,
+                }}
+              >
+                {' '}
+                {props.price} TND{' '}
+              </Text>
+            </Text>
+          </View>
         </Card.Content>
         <TouchableOpacity onPress={() => {}}>
-          <Card.Cover source={{ uri: props.image }} style={{ borderRadius: 5 }} />
+          <Card.Cover source={{ uri: props.image }} style={{ marginVertical: 5, borderRadius: 5 }} />
         </TouchableOpacity>
         <Card.Actions style={{ marginVertical: 5, paddingVertical: 0 }}>
           <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1, justifyContent: 'space-between' }}>
+            {
+              // TODO #3 Correct the logic here, so you can remove the fav once it's clicked again !
+            }
             <HeartAnime
               favorite={State.favorites?.includes(props.id)}
               onPress={() =>

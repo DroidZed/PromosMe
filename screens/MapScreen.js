@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, Text } from 'react-native';
 
 //Imported Libraries
-import MapboxGL, { MapView, Camera, MarkerView } from '@react-native-mapbox-gl/maps';
+import MapboxGL, { MapView, Camera, MarkerView, UserLocation } from '@react-native-mapbox-gl/maps';
 import { useColorScheme } from 'react-native-appearance';
 import RNLocation from 'react-native-location';
 //import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -68,6 +68,7 @@ const MapScreen = (props) => {
             *</MarkerView>
             */
             }
+            <UserLocation animated={true} androidRenderMode="compass" visible={true} showsUserHeadingIndicator={true} minDisplacement={5} />
           </MapView>
         </View>
         <FocusAwareStatusBar barStyle="light-content" backgroundColor={Colors.mapBar} />

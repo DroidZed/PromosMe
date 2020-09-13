@@ -12,4 +12,5 @@ export default {
   heartColor: 'rgb(233, 53, 134)',
   mapBar: 'rgb(77, 133, 0)',
   mapHeader: 'rgb(164, 255, 36)',
+  priceText: 'rgb(245, 64, 36)'
 };

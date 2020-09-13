@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Image, StyleSheet, ScrollView, Text } from 'react-native';
 
 //Custom Components:
 import Header from '../components/Header';
@@ -30,13 +30,7 @@ const ContactScreen = (props) => {
           />
         </View>
         <View>
-          <Card
-            style={{
-              ...Styling.cardCtr,
-              backgroundColor: 'transparent',
-              borderRadius: 20,
-            }}
-          >
+          <Card style={Styling.cardCtr}>
             <Card.Cover
               source={{ uri: 'full_stack' }}
               width={330}
@@ -49,8 +43,9 @@ const ContactScreen = (props) => {
               }}
             />
 
-            <UICondText style={{ alignSelf: 'center', marginVertical: 10 }}>
-              Web & Mobile Development Agency{'\n'}
+            <UICondText style={{ alignSelf: 'center', marginVertical: 20, fontSize: 20 }}>
+              <Text style={{ color: 'rgb(2, 151, 19)' }}>Web</Text> &{' '}
+              <Text style={{ color: 'rgb(4, 127, 220)' }}>Mobile</Text> Development Agency{'\n'}
             </UICondText>
 
             <View
@@ -93,13 +88,7 @@ const ContactScreen = (props) => {
             </View>
             <View>
               <UICondText style={{ alignSelf: 'center', marginVertical: 10, fontSize: 35 }}>Aymen Dhahri</UICondText>
-              <Card
-                style={{
-                  ...Styling.cardCtr,
-                  backgroundColor: 'transparent',
-                  borderRadius: 20,
-                }}
-              >
+              <Card style={Styling.cardCtr}>
                 <Animatable.Text
                   style={{
                     alignSelf: 'center',
@@ -139,7 +128,7 @@ const ContactScreen = (props) => {
                     where={'https:github.com/DroidZed'}
                     name="github"
                     size={20}
-                    color="white"
+                    color={colorScheme === 'light' ? 'black' : 'white'}
                   />
 
                   <LabelToButtonInline
@@ -187,7 +176,8 @@ const Styling = StyleSheet.create({
     marginVertical: 5,
     marginHorizontal: 5,
     paddingHorizontal: 5,
-    elevation: 10,
+    elevation: 0,
+    backgroundColor: 'transparent',
   },
   imageContainer: {
     borderRadius: 150,

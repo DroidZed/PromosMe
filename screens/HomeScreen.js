@@ -16,16 +16,13 @@ import FocusAwareStatusBar from '../components/FocusAware';
 import Colors from '../constants/Colors';
 
 const HomeScreen = () => {
-  const { State, setState } = useContext(store);
+  const { State } = useContext(store);
   const [input, setInput] = useState('');
+  const [pressed, setPressed] = useState(false);
   const [collectedData, setCollectedData] = useState([]);
   const colorScheme = useColorScheme();
-
-  const filterFavs = (item) => {
-    return collectedData.filter(State.includes(item.id));
-  };
-
-  console.log(State);
+  const _backup_Data = collectedData;
+  let fav_col = collectedData.filter((e) => State.favorites.includes(e.id));
 
   const renderItem = ({ item }) => (
     <Product
@@ -35,11 +32,14 @@ const HomeScreen = () => {
       promo={item.promo}
       address={item.address}
       image={item.image?.split('.')[0]}
+      price={item.price}
       id={item.id}
     />
   );
 
-  const url = 'http://localhost:3000/Article/';
+  console.log(State);
+
+  const url = 'http://localhost:3000/Product/';
 
   const getInfos = () => {
     return fetch(url)
@@ -58,7 +58,7 @@ const HomeScreen = () => {
   useEffect(() => {
     getInfos();
   }, []);
-  
+
   return (
     <TouchableWithoutFeedback>
       <Provider>
@@ -74,6 +74,8 @@ const HomeScreen = () => {
                   ? !input.includes(',')
                     ? collectedData.filter((term) => (term.type.includes(input) ? term : null))
                     : collectedData.filter((term) => input.split(',').includes(term.type))
+                  : pressed
+                  ? fav_col
                   : collectedData
               }
               renderItem={renderItem}
@@ -81,7 +83,7 @@ const HomeScreen = () => {
               showsVerticalScrollIndicator={false}
             />
           </View>
-          <FAB style={Styling.fab} small icon="heart" onPress={() => console.log('Pressed')} />
+          <FAB style={Styling.fab} small icon="heart" onPress={() => setPressed(!pressed)} />
         </View>
       </Provider>
     </TouchableWithoutFeedback>
