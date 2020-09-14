@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Keyboard, Text } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 //Imported Libraries
-import MapboxGL, { MapView, Camera, MarkerView, UserLocation } from '@react-native-mapbox-gl/maps';
+import MapboxGL, { MapView, Camera, UserLocation } from '@react-native-mapbox-gl/maps';
 import { useColorScheme } from 'react-native-appearance';
 import RNLocation from 'react-native-location';
-//import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 //Custom Components:
 import Header from '../components/Header';
@@ -18,9 +17,10 @@ MapboxGL.setAccessToken('sk.eyJ1IjoiZHJvaWR6ZWQiLCJhIjoiY2tld3VoeXBiMDRwYTJxbjFo
 MapboxGL.setConnected(true);
 MapboxGL.setTelemetryEnabled(false);
 
-const MapScreen = (props) => {
-  const [coords, setCoords] = useState({});
+const MapScreen = () => {
   const colorScheme = useColorScheme();
+
+  console.info('From map Screen', State);
 
   const clawLocation = () => {
     RNLocation.configure({
@@ -33,14 +33,13 @@ const MapScreen = (props) => {
       },
     }).then((granted) => {
       if (granted) {
-        RNLocation.subscribeToLocationUpdates((locations) => {
-          setCoords(locations[0]);
-        });
+        RNLocation.subscribeToLocationUpdates();
       }
     });
   };
 
   useEffect(() => clawLocation());
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={{ flex: 1, backgroundColor: colorScheme === 'dark' ? 'black' : 'white' }}>
@@ -56,19 +55,14 @@ const MapScreen = (props) => {
                 : 'mapbox://styles/droidzed/ckewxpuy40mla19pbmvzp2bp8'
             }
           >
-            <Camera zoomLevel={15} followUserLocation={coords ? true : false} />
-            {
-              // TODO: #2 FIX THE DAMN MARKER THING ... :(
-              /*  
-              
-            *<MarkerView coordinate={[coords.longitude, coords.latitude]} id="1">
-             * <View>
-             *   <MaterialCommunityIcons name="map-marker" size={30} color="red" />
-             * </View>
-            *</MarkerView>
-            */
-            }
-            <UserLocation animated={true} androidRenderMode="compass" visible={true} showsUserHeadingIndicator={true} minDisplacement={5} />
+            <Camera zoomLevel={15} followUserLocation={true} />
+            <UserLocation
+              animated={true}
+              androidRenderMode="compass"
+              visible={true}
+              showsUserHeadingIndicator={true}
+              minDisplacement={5}
+            />
           </MapView>
         </View>
         <FocusAwareStatusBar barStyle="light-content" backgroundColor={Colors.mapBar} />
