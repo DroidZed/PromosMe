@@ -20,8 +20,6 @@ MapboxGL.setTelemetryEnabled(false);
 const MapScreen = () => {
   const colorScheme = useColorScheme();
 
-  console.info('From map Screen', State);
-
   const clawLocation = () => {
     RNLocation.configure({
       distanceFilter: 5.0,
