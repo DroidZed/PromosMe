@@ -46,11 +46,7 @@ const App = () => {
   const [isThereInternet, setIsThereInternet] = useState(false);
 
   const fetchingNetInfo = () => {
-    NetInfo.fetch().then((state) => {
-      console.log('Connection type', state.type);
-      console.log('Is connected?', state.isConnected);
-      setIsThereInternet(state.isConnected);
-    });
+    NetInfo.fetch().then((state) => setIsThereInternet(state.isConnected));
     SplashScreen.hide();
   };
 

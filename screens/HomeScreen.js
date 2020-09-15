@@ -39,12 +39,11 @@ const HomeScreen = () => {
 
   console.log(State);
 
-  const url = 'http://localhost:3000/Product/';
+  const url = 'https://droidzed.loca.lt/Product/';
 
   const getInfos = () => {
     return fetch(url)
       .then((response) => {
-        console.log('SUCCESS');
         response
           .json()
           .then((data) => {
@@ -52,7 +51,7 @@ const HomeScreen = () => {
           })
           .catch('NO DATA TO BE RETRIEVED.');
       })
-      .catch(console.log('FAILURE'));
+      .catch('FAILURE');
   };
 
   useEffect(() => {

@@ -63,3 +63,6 @@ template.js
 
 #shell script to make things easier:
 cleanAndBuild.bat
+
+*.apk
+output.json
