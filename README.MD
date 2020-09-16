@@ -30,16 +30,16 @@ Inside the root folder:
 # About the fetching part in the code :
 ```js
  const getInfos = () => {
-    return fetch(url)
+    fetch(url)
       .then((response) => {
         response
           .json()
           .then((data) => {
             setCollectedData(data);
           })
-          .catch('NO DATA TO BE RETRIEVED.');
+          .catch(alert('NO DATA TO BE RETRIEVED.'));
       })
-      .catch('FAILURE');
+      .catch(alert('FAILURE'));
   };
 
 ```
@@ -57,6 +57,10 @@ The component***s*** your should watch for *are* these one***s***:
 
 Go to the [release](./android/app/build/outputs/release/) folder and choose which apk is suitable for
 your Android device...you can check no your CPU's architerture, you can find more about when you install Droid HardWare Info.
+
+## A small yet very important notice :
+
+You'll find included a file called [cleanAndBuild](./cleanAndBuild.bat)... read the comments I wrote there carefully to better make use of it.
 
 Well, that's pretty much it !
 Thanks for tuning in, Good bye !
