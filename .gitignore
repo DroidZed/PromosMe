@@ -1,33 +1,16 @@
-# OSX
-#
-.DS_Store
-
-# Xcode
-#
-build/
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-xcuserdata
-*.xccheckout
-*.moved-aside
-DerivedData
-*.hmap
-*.ipa
-*.xcuserstate
-
 # Android/IntelliJ
-#
-build/
+generated
+intermediates
+logs
+mapping
+reports
+tmp
 .idea
 .gradle
 local.properties
 *.iml
+!app-*-release.apk
+!output.json
 
 # node.js
 #
@@ -54,15 +37,3 @@ buck-out/
 
 # Bundle artifact
 *.jsbundle
-
-# CocoaPods
-/ios/Pods/
-
-#template file for creating components !
-template.js
-
-#shell script to make things easier:
-cleanAndBuild.bat
-
-*.apk
-output.json
