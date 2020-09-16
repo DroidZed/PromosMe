@@ -42,16 +42,16 @@ const HomeScreen = () => {
   const url = 'https://droidzed.loca.lt/Product/';
 
   const getInfos = () => {
-    return fetch(url)
+    fetch(url)
       .then((response) => {
         response
           .json()
           .then((data) => {
             setCollectedData(data);
           })
-          .catch('NO DATA TO BE RETRIEVED.');
+          .catch(alert('NO DATA TO BE RETRIEVED.'));
       })
-      .catch('FAILURE');
+      .catch(alert('Unable to reach the server...'));
   };
 
   useEffect(() => {
