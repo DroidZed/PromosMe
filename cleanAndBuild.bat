@@ -13,7 +13,7 @@ cd android && .\gradlew clean && cd .. && react-native run-android
 @rem REMOVE THE @REM clauses and all of the ABOVE up to the cls line.
 
 @rem echo Choose what to do (Release: R / Debug: D)
-@rem set /p "res=>"
+@rem set/p "res=>"
 @rem if %res%==R goto RELEASE
 @rem if %res%==D goto DEBUG
 @rem echo Invalid choice.
