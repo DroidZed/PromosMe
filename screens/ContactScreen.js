@@ -32,7 +32,7 @@ const ContactScreen = (props) => {
         <View>
           <Card style={Styling.cardCtr}>
             <Card.Cover
-              source={{ uri: 'full_stack' }}
+              source={{ uri: colorScheme === 'light' ? 'fullstack' : 'fullstack_dark' }}
               width={330}
               height={90}
               style={{

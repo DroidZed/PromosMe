@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 
 //custom components:
 import { Dialog, Button, Paragraph, Portal } from 'react-native-paper';
@@ -22,7 +22,5 @@ const DialogInternet = (props) => {
     </View>
   );
 };
-
-const Styling = StyleSheet.create({});
 
 export default DialogInternet;
