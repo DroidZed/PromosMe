@@ -52,9 +52,9 @@ const HomeScreen = () => {
               .then((data) => {
                 setCollectedData(data);
               })
-              .catch(alert('NO DATA TO BE RETRIEVED.'));
+              .catch();
           })
-          .catch(alert('Unable to reach the server...'));
+          .catch();
       }
     });
   };
