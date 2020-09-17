@@ -11,6 +11,7 @@ import ProdSearchBar from '../components/ProdSearchBar';
 import Product from '../components/Product';
 import Header from '../components/Header';
 import FocusAwareStatusBar from '../components/FocusAware';
+import NetInfo from '@react-native-community/netinfo';
 
 //Color Palette:
 import Colors from '../constants/Colors';
@@ -41,17 +42,21 @@ const HomeScreen = () => {
 
   const url = 'https://droidzed.loca.lt/Product/';
 
-  const getInfos = () => {
-    fetch(url)
-      .then((response) => {
-        response
-          .json()
-          .then((data) => {
-            setCollectedData(data);
+  const getInfos = async () => {
+    NetInfo.addEventListener((cnx_state) => {
+      if (cnx_state.isConnected === true) {
+        fetch(url)
+          .then((response) => {
+            response
+              .json()
+              .then((data) => {
+                setCollectedData(data);
+              })
+              .catch(alert('NO DATA TO BE RETRIEVED.'));
           })
-          .catch(alert('NO DATA TO BE RETRIEVED.'));
-      })
-      .catch(alert('Unable to reach the server...'));
+          .catch(alert('Unable to reach the server...'));
+      }
+    });
   };
 
   useEffect(() => {

@@ -39,7 +39,7 @@ const ContactScreen = (props) => {
                 alignSelf: 'center',
                 height: 80,
                 width: 330,
-                backgroundColor: colorScheme === 'dark' ? 'transparent' : 'gray',
+                backgroundColor: 'transparent'
               }}
             />
 
