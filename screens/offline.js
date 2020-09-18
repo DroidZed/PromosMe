@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, StatusBar } from 'react-native';
 import { useColorScheme } from 'react-native-appearance';
 import * as Animatable from 'react-native-animatable';
 
-const offlineScreen = () => {
+const offlineScreen = (props) => {
   const colorScheme = useColorScheme();
 
   return (
@@ -28,10 +28,11 @@ const offlineScreen = () => {
           Whoops !
         </Text>
         <Text style={{ ...Styling.textStyle, color: colorScheme === 'dark' ? 'white' : 'black', fontSize: 20 }}>
-          {'\n'} Looks like you're offline...
+          {'\n'} {props.customMsg1 || "Looks like you're offline..."}
         </Text>
         <Text style={{ ...Styling.textStyle, color: colorScheme === 'dark' ? 'white' : 'black', fontSize: 15 }}>
-          {'\n'}I don't work without internet and you know that !
+          {'\n'}
+          {props.customMsg2 || "I don't work without internet and you know that !"}
         </Text>
       </View>
       <StatusBar barStyle="light-content" backgroundColor="black" />

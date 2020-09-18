@@ -12,6 +12,7 @@ import Product from '../components/Product';
 import Header from '../components/Header';
 import FocusAwareStatusBar from '../components/FocusAware';
 import NetInfo from '@react-native-community/netinfo';
+import OfflineScreen from './offline';
 
 //Color Palette:
 import Colors from '../constants/Colors';
@@ -23,7 +24,11 @@ const HomeScreen = () => {
   const [collectedData, setCollectedData] = useState([]);
   const colorScheme = useColorScheme();
 
-  let fav_col = collectedData.filter((e) => State.favorites.includes(e.id));
+  let fav_col = [];
+
+  if (collectedData.length) {
+    fav_col = collectedData.filter((e) => State.favorites.includes(e.id));
+  }
 
   const renderItem = ({ item }) => (
     <Product
@@ -38,8 +43,6 @@ const HomeScreen = () => {
     />
   );
 
-  console.log(State);
-
   const url = 'https://droidzed.loca.lt/Product/';
 
   const getInfos = async () => {
@@ -52,9 +55,9 @@ const HomeScreen = () => {
               .then((data) => {
                 setCollectedData(data);
               })
-              .catch();
+              .catch((err) => console.warn('No data :', err));
           })
-          .catch();
+          .catch((err) => console.error('No connection to database :', err));
       }
     });
   };
@@ -70,23 +73,30 @@ const HomeScreen = () => {
           <FocusAwareStatusBar barStyle="light-content" backgroundColor={Colors.darkPrimary} />
           <Header title="HOME" style={{ backgroundColor: Colors.accent }} />
           <ProdSearchBar val={input} clearInput={() => setInput('')} updateSearch={(search) => setInput(search)} />
-          <View style={Styling.ListContainer}>
-            <FlatList
-              contentContainerStyle={{ padding: 10 }}
-              data={
-                input
-                  ? !input.includes(',')
-                    ? collectedData.filter((term) => (term.type.includes(input) ? term : null))
-                    : collectedData.filter((term) => input.split(',').includes(term.type))
-                  : pressed && fav_col
-                  ? fav_col
-                  : collectedData
-              }
-              renderItem={renderItem}
-              keyExtractor={(item) => String(item.id)}
-              showsVerticalScrollIndicator={false}
+          {collectedData.length ? (
+            <View style={Styling.ListContainer}>
+              <FlatList
+                contentContainerStyle={{ padding: 10 }}
+                data={
+                  input
+                    ? !input.includes(',')
+                      ? collectedData.filter((term) => (term.type.includes(input) ? term : null))
+                      : collectedData.filter((term) => input.split(',').includes(term.type))
+                    : pressed && fav_col
+                    ? fav_col
+                    : collectedData
+                }
+                renderItem={renderItem}
+                keyExtractor={(item) => String(item.id)}
+                showsVerticalScrollIndicator={false}
+              />
+            </View>
+          ) : (
+            <OfflineScreen
+              customMsg1="The api is not working..."
+              customMsg2="please try reloading the app after some time."
             />
-          </View>
+          )}
           <FAB style={Styling.fab} small icon="heart" onPress={() => setPressed(!pressed)} />
         </View>
       </Provider>

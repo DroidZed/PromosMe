@@ -11,6 +11,7 @@ local.properties
 *.iml
 !app-*-release.apk
 !output.json
+android/app/build/outputs/apk/debug/*
 
 # node.js
 #

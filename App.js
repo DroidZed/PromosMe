@@ -43,11 +43,11 @@ function mapScreen() {
 
 const App = () => {
   const colorScheme = useColorScheme();
-  const [isThereInternet, setIsThereInternet] = useState(false);
+  const [isThereInternet, setIsThereInternet] = useState(null);
 
   const fetchingNetInfo = () => {
-    NetInfo.fetch().then((state) => setIsThereInternet(state.isConnected));
     SplashScreen.hide();
+    NetInfo.fetch().then((state) => setIsThereInternet(state.isConnected));
   };
 
   useEffect(() => fetchingNetInfo(), []);
