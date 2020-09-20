@@ -49,14 +49,31 @@ To make sure everything is working fine, make a MySQL database, feel free to con
 
 The component***s*** your should watch for *are* these one***s***:
 
-> HomeScreen: containing a flatlist that would show the data in a cool way
+> HomeScreen: containing a FlatList that would show the data in a cool way
 
 > Product: your actual data , but in JavaScript.
 
 ## Installing the provided APKs:
 
 Go to the [release](./android/app/build/outputs/release/) folder and choose which apk is suitable for
-your Android device...you can check no your CPU's architerture, you can find more about when you install Droid HardWare Info.
+your Android device...you can check no your CPU's architecture, you can find more about when you install Droid HardWare Info:
+
+1. Install Droid Hardware Info from [google play](https://play.google.com/store/apps/details?id=com.inkwired.droidinfo&hl=en)
+
+2. When done this screen should show up:
+
+![](./screenshots/start.png)
+
+3. Head to the System tab and check these lines : Architecture & Instruction Sets
+
+![](./screenshots/finish.png)
+
+4. Go to the [release](./android/app/build/outputs/apk/release) folder and choose the corresponding apk to your specs.
+
+The APKs should be named like this app-*architecture*-release.apk
+
+Here's a [good guide on android phone's architecture](https://www.droidviews.com/check-android-phones-processor/) I used to choose the correct APK for my phone.
+
 
 ## A small yet very important notice :
 
