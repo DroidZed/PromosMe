@@ -47,7 +47,7 @@ const App = () => {
 
   const fetchingNetInfo = () => {
     SplashScreen.hide();
-    NetInfo.fetch().then((state) => setIsThereInternet(state.isConnected));
+    NetInfo.addEventListener((cnx_state) => setIsThereInternet(cnx_state.isConnected));
   };
 
   useEffect(() => fetchingNetInfo(), []);
