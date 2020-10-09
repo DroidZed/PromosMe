@@ -62,11 +62,11 @@ const ContactScreen = (props) => {
                 color="gray"
               />
 
-              <LabelToButtonInline label="Website" where={'http:www.fullstack.tn/'} name="web" size={20} color="gray" />
+              <LabelToButtonInline label="Website" where={'https:www.fullstack.tn/'} name="web" size={20} color="gray" />
 
               <LabelToButtonInline
                 label="Address"
-                where={'P8M8+G9 Ez Zahra'}
+                where={'https:plus.codes/P8M8+G9EzZahra'}
                 name="map-marker-radius-outline"
                 size={20}
                 color="gray"
