@@ -13,7 +13,7 @@ import FocusAwareStatusBar from '../components/FocusAware';
 //Color Palette:
 import Colors from '../constants/Colors';
 
-MapboxGL.setAccessToken('sk.eyJ1IjoiZHJvaWR6ZWQiLCJhIjoiY2tld3VoeXBiMDRwYTJxbjFodnZreTUydCJ9.9YtXrG1a6FJMijKawrZMMA');
+  MapboxGL.setAccessToken('MAPBOX-ACCESS-TOKEN');
 MapboxGL.setConnected(true);
 MapboxGL.setTelemetryEnabled(false);
 
@@ -49,8 +49,8 @@ const MapScreen = () => {
             compassEnabled={true}
             styleURL={
               colorScheme === 'dark'
-                ? 'mapbox://styles/droidzed/ckewxui2c171z1ao9fy85mk6o'
-                : 'mapbox://styles/droidzed/ckewxpuy40mla19pbmvzp2bp8'
+                ? 'mapbox://styles/USERNAME/STYLE-ID-FOR-DARK-MODE'
+                : 'mapbox://styles/droidzed/STYLE-ID-FOR-LIGHT-MODE'
             }
           >
             <Camera zoomLevel={15} followUserLocation={true} />
