@@ -10,7 +10,7 @@ cls
 cd android && .\gradlew clean && cd .. && react-native run-android
 
 @rem Another way, is using the custom script I wrote here:
-@rem REMOVE THE @REM clauses and all of the BELOW and comment out
+@rem REMOVE THE @REM clauses and all of the ABOVE and comment out
 @rem line 10 by adding @rem in front of it and escape with a space
 
 @rem echo Choose what to do (Clean: C / Release: R / Debug: D)
