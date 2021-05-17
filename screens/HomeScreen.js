@@ -53,17 +53,11 @@ const HomeScreen = () => {
 
   const getInfos = async () => {
     NetInfo.addEventListener((cnx_state) => {
-      if (cnx_state.isConnected === true) {
-        fetch(url)
-          .then((response) => {
-            response
-              .json()
-              .then((data) => {
-                setCollectedData(data);
-              })
-              .catch((err) => console.warn("No data :", err));
-          })
-          .catch((err) => console.error("No connection to database :", err));
+      if (cnx_state.isConnected === true)
+      {
+         let resp = await fetch(url);
+         let data = await resp.json();
+         setCollectedData(data);
       }
     });
   };
